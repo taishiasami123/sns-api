@@ -1,3 +1,5 @@
+// token
+// 3CZFxXXePI7Q66tGf1Gcvwtt
 
 //ユーザー登録
 const register = () =>{
