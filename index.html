@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <title>SNS API</title>
+    <link rel="stylesheet" href="html5reset-1.6.1.css">
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+
+<body>
+    <h1>SNS API</h1>
+    <h2>新規登録</h2>
+    <div class="signup">
+        <p>name</p>
+        <input type="text" id="signUpInputName" placeholder="名前">
+        <p>bio</p>
+        <input type="text" id="signUpInputBio" placeholder="自己紹介">
+        <p>email</p>
+        <input type="email" id="signUpInputEmail" placeholder="メールアドレス">
+        <p>password</p>
+        <input type="password" id="signUpInputPwd" placeholder="パスワード">
+        <p>confirm password</p>
+        <input type="password" id="signUpInputCfmPwd" placeholder="パスワード確認">
+        <p>登録</p>
+        <button type="submit" onclick="register()">登録</button>        
+    </div>
+    <h2>ログイン</h2>
+    <div class="signin">
+        <p>email</p>
+        <input type="email" id="signInInputEmail" placeholder="メールアドレス">
+        <p>password</p>
+        <input type="password" id="signInInputPwd" placeholder="パスワード">
+        <p>confirm password</p>
+        <input type="password" id="signInInputCfmPwd" placeholder="パスワード確認">
+        <p>ログイン</p>
+        <button type="submit" onclick="login()">ログイン</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
