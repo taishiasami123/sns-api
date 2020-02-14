@@ -1,0 +1,25 @@
+.signup{
+    display: flex;
+}
+
+.signup input{
+    border: 1px black solid;
+}
+
+.signup button{
+    background-color: blue;
+    color: white;
+}
+
+.signin{
+    display: flex;
+}
+
+.signin input{
+    border: 1px black solid;
+}
+
+.signin button{
+    background-color: blue;
+    color: white;
+}
