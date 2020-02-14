@@ -1,12 +1,3 @@
-const data = {
-    sign_up_user_params: {
-        name: "taishi",
-        bio: "bio",
-        email: "taishi.asami123@gmail.com",
-        password: "password",
-        password_confirmation: "password"
-    }
-}
 
 fetch("https://teachapi.herokuapp.com/sign_up", {
     method: "POST", // *GET, POST, PUT, DELETE, etc.
