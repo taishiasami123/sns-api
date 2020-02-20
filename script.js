@@ -57,6 +57,7 @@ const signIn = () => {
         })
         .then(json => {
             console.log(json);
+            localStorage.setItem("id", json.id)
             localStorage.setItem("token", json.token)
         });
 };
