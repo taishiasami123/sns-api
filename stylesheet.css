@@ -1,25 +1,16 @@
-.signup{
+.container{
     display: flex;
 }
 
-.signup input{
+.container input{
     border: 1px black solid;
 }
 
-.signup button{
+.container button{
     background-color: blue;
     color: white;
 }
 
-.signin{
-    display: flex;
-}
-
-.signin input{
+.container select{
     border: 1px black solid;
-}
-
-.signin button{
-    background-color: blue;
-    color: white;
 }
