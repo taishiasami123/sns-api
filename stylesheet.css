@@ -1,0 +1,16 @@
+.container{
+    display: flex;
+}
+
+.container input{
+    border: 1px black solid;
+}
+
+.container button{
+    background-color: blue;
+    color: white;
+}
+
+.container select{
+    border: 1px black solid;
+}
