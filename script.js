@@ -1,3 +1,4 @@
+let url = "https://teachapi.herokuapp.com/";
 //ユーザー登録
 const signUp = () => {
   const name = document.getElementById("signUpInputName").value;
@@ -14,7 +15,7 @@ const signUp = () => {
       password_confirmation: password_confirmation
     }
   };
-  fetch("https://teachapi.herokuapp.com/sign_up", {
+  fetch(`${url}sign_up`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
@@ -44,7 +45,7 @@ const signIn = () => {
       password_confirmation: passwordConfirmation
     }
   };
-  fetch("https://teachapi.herokuapp.com/sign_in", {
+  fetch(`${url}sign_in`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
@@ -69,7 +70,7 @@ const userList = () => {
   const userSearch = document.getElementById("userListSearch").value;
   const userList = document.getElementById("userList");
   const token = localStorage.getItem("token");
-  fetch(`https://teachapi.herokuapp.com/users?page=${userPageNumber}&limit=${userPageLimit}&query=${userSearch}`, {
+  fetch(`${url}users?page=${page}&limit=${limit}&query=${query}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
@@ -99,7 +100,7 @@ const postList = () => {
   const postSearch = document.getElementById("postSearch").value;
   const postList = document.getElementById("postList");
   const token = localStorage.getItem("token");
-  fetch(`https://teachapi.herokuapp.com/posts?page=${postPageNumber}&limit=${postPageLimit}&query=${postSearch}`, {
+  fetch(`${url}posts?page=${page}&limit=${limit}&query=${query}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
@@ -134,7 +135,7 @@ const editUser = () => {
   };
   const id = localStorage.getItem("id");
   const token = localStorage.getItem("token");
-  fetch(`https://teachapi.herokuapp.com/users/${id}`, {
+  fetch(`${url}users/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
@@ -155,7 +156,7 @@ const editUser = () => {
 const deleteUser = () => {
   const id = document.getElementById("deleteUser").value;
   const token = localStorage.getItem("token");
-  fetch(`https://teachapi.herokuapp.com/users/${id}`, {
+  fetch(`${url}users/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
@@ -179,7 +180,7 @@ const timeline = () => {
   const tlSearch = document.getElementById("tlSearch").value;
   const tlList = document.getElementById("tlList");
   const token = localStorage.getItem("token");
-  fetch(`https://teachapi.herokuapp.com/users/${tlId}/timeline?page=${tlPageNumber}&limit=${tlPageLimit}&query=${tlSearch}`, {
+  fetch(`${url}users/${id}/timeline?page=${page}&limit=${limit}&query=${query}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
@@ -211,7 +212,7 @@ const submitPost = () => {
     }
   };
   const token = localStorage.getItem("token");
-  fetch("https://teachapi.herokuapp.com/posts", {
+  fetch(`${url}posts`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
@@ -238,7 +239,7 @@ const editPost = () => {
     }
   };
   const token = localStorage.getItem("token");
-  fetch(`https://teachapi.herokuapp.com/posts/${id}`, {
+  fetch(`${url}posts/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
@@ -259,7 +260,7 @@ const editPost = () => {
 const deletePost = () => {
   const id = document.getElementById("deletePostId").value;
   const token = localStorage.getItem("token");
-  fetch(`https://teachapi.herokuapp.com/posts/${id}`, {
+  fetch(`${url}posts/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
