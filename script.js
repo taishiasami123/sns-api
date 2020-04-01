@@ -84,13 +84,14 @@ const userList = () => {
   })
   .then(json => {
     console.log(json);
-    let br = "<br>";
+    let listedObj = "";
     for (let i = 0; i < json.length; i++) {
       const obj = json[i];
-      const objstr = JSON.stringify(obj.name);
-      br += objstr + "<br>";
+      const strObj = JSON.stringify(obj.name);
+      const slicedObj = strObj.slice(1, -1);
+      listedObj += '<li class="list-group-item">' + slicedObj + '</li>';
     }
-    userList.innerHTML = br;
+    list.innerHTML = listedObj;
   });
 };
 
@@ -114,13 +115,14 @@ const postList = () => {
   })
   .then(json => {
     console.log(json);
-    let br = "<br>";
+    let listedObj = "";
     for (let i = 0; i < json.length; i++) {
       const obj = json[i];
-      const objstr = JSON.stringify(obj.text);
-      br += objstr + "<br>";
+      const strObj = JSON.stringify(obj.text);
+      const slicedObj = strObj.slice(1, -1);
+      listedObj += '<li class="list-group-item">' + slicedObj + '</li>';
     }
-    postList.innerHTML = br;
+    list.innerHTML = listedObj;
   });
 };
 
@@ -194,13 +196,14 @@ const timeline = () => {
   })
   .then(json => {
     console.log(json);
-    let br = "<br>";
+    let listedObj = "";
     for (let i = 0; i < json.length; i++) {
       const obj = json[i];
-      const objstr = JSON.stringify(obj.text);
-      br += objstr + "<br>";
+      const strObj = JSON.stringify(obj.text);
+      const slicedObj = strObj.slice(1, -1);
+      listedObj += '<li class="list-group-item">' + slicedObj + '</li>';
     }
-    tlList.innerHTML = br;
+    list.innerHTML = listedObj;
   });
 };
 
