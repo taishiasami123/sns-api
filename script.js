@@ -1,12 +1,12 @@
-let url = "https://teachapi.herokuapp.com/";
+let url = 'https://teachapi.herokuapp.com/';
 
 //ユーザー登録
 const signup = () => {
-  const name = document.getElementById("signupName").value;
-  const bio = document.getElementById("signupBio").value;
-  const email = document.getElementById("signupEmail").value;
-  const password = document.getElementById("signupPwd").value;
-  const password_confirmation = document.getElementById("signupCfmPwd").value
+  const name = document.getElementById('signupName').value;
+  const bio = document.getElementById('signupBio').value;
+  const email = document.getElementById('signupEmail').value;
+  const password = document.getElementById('signupPwd').value;
+  const password_confirmation = document.getElementById('signupCfmPwd').value
   const data = {
     sign_up_user_params: {
       name: name,
@@ -17,9 +17,9 @@ const signup = () => {
     }
   };
   fetch(`${url}sign_up`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json; charset=utf-8",
+      'Content-Type': 'application/json; charset=utf-8',
     },
     body: JSON.stringify(data),
   })
@@ -29,16 +29,16 @@ const signup = () => {
   })
   .then(json => {
     console.log(json);
-    localStorage.setItem("id", json.id);
-    localStorage.setItem("token", json.token)
+    localStorage.setItem('id', json.id);
+    localStorage.setItem('token', json.token)
   });
 };
 
 // ユーザーログイン
 const signin = () => {
-  const email = document.getElementById("signinEmail").value;
-  const password = document.getElementById("signinPwd").value;
-  const passwordConfirmation = document.getElementById("signinCfmPwd").value;
+  const email = document.getElementById('signinEmail').value;
+  const password = document.getElementById('signinPwd').value;
+  const passwordConfirmation = document.getElementById('signinCfmPwd').value;
   const data = {
     sign_in_user_params: {
       email: email,
@@ -47,9 +47,9 @@ const signin = () => {
     }
   };
   fetch(`${url}sign_in`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json; charset=utf-8",
+      'Content-Type': 'application/json; charset=utf-8',
     },
     body: JSON.stringify(data),
   })
@@ -59,23 +59,23 @@ const signin = () => {
   })
   .then(json => {
     console.log(json);
-    localStorage.setItem("id", json.id)
-    localStorage.setItem("token", json.token)
+    localStorage.setItem('id', json.id)
+    localStorage.setItem('token', json.token)
   });
 };
 
 // ユーザー一覧
 const userList = () => {
-  const page = document.getElementById("userlistPageNum").value;
-  const limit = document.getElementById("userlistLimit").value;
-  const query = document.getElementById("userlistSearch").value;
-  const list = document.getElementById("userList");
-  const token = localStorage.getItem("token");
+  const page = document.getElementById('userlistPageNum').value;
+  const limit = document.getElementById('userlistLimit').value;
+  const query = document.getElementById('userlistSearch').value;
+  const list = document.getElementById('userList');
+  const token = localStorage.getItem('token');
   fetch(`${url}users?page=${page}&limit=${limit}&query=${query}`, {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "Authorization": "Bearer " + token
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': 'Bearer ' + token
     }
   })
   .then(response => {
@@ -84,7 +84,7 @@ const userList = () => {
   })
   .then(json => {
     console.log(json);
-    let listedObj = "";
+    let listedObj = '';
     for (let i = 0; i < json.length; i++) {
       const obj = json[i];
       const strObj = JSON.stringify(obj.name);
@@ -97,16 +97,16 @@ const userList = () => {
 
 // 投稿一覧
 const postList = () => {
-  const page = document.getElementById("postPageNum").value;
-  const limit = document.getElementById("postLimit").value;
-  const query = document.getElementById("postSearch").value;
-  const list = document.getElementById("postList");
-  const token = localStorage.getItem("token");
+  const page = document.getElementById('postPageNum').value;
+  const limit = document.getElementById('postLimit').value;
+  const query = document.getElementById('postSearch').value;
+  const list = document.getElementById('postList');
+  const token = localStorage.getItem('token');
   fetch(`${url}posts?page=${page}&limit=${limit}&query=${query}`, {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "Authorization": "Bearer " + token
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': 'Bearer ' + token
     }
   })
   .then(response => {
@@ -115,7 +115,7 @@ const postList = () => {
   })
   .then(json => {
     console.log(json);
-    let listedObj = "";
+    let listedObj = '';
     for (let i = 0; i < json.length; i++) {
       const obj = json[i];
       const strObj = JSON.stringify(obj.text);
@@ -128,21 +128,21 @@ const postList = () => {
 
 // ユーザー編集
 const editUser = () => {
-  const id = document.getElementById("editUserId").value
-  const name = document.getElementById("editUserName").value;
-  const bio = document.getElementById("editUserBio").value;
+  const id = document.getElementById('editUserId').value
+  const name = document.getElementById('editUserName').value;
+  const bio = document.getElementById('editUserBio').value;
   const data = {
     user_params: {
       name: name,
       bio: bio,
     }
   };
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
   fetch(`${url}users/${id}`, {
-    method: "PUT",
+    method: 'PUT',
     headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "Authorization": "Bearer " + token
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': 'Bearer ' + token
     },
     body: JSON.stringify(data),
   })
@@ -157,13 +157,13 @@ const editUser = () => {
 
 // ユーザー削除
 const deleteUser = () => {
-  const id = document.getElementById("deleteUserId").value;
-  const token = localStorage.getItem("token");
+  const id = document.getElementById('deleteUserId').value;
+  const token = localStorage.getItem('token');
   fetch(`${url}users/${id}`, {
-    method: "DELETE",
+    method: 'DELETE',
     headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "Authorization": "Bearer " + token
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': 'Bearer ' + token
     },
   })
   .then(response => {
@@ -177,17 +177,17 @@ const deleteUser = () => {
 
 // タイムライン
 const timeline = () => {
-  const id = document.getElementById("tlId").value;
-  const page = document.getElementById("tlPageNum").value;
-  const limit = document.getElementById("tlLimit").value;
-  const query = document.getElementById("tlSearch").value;
-  const list = document.getElementById("tlList");
-  const token = localStorage.getItem("token");
+  const id = document.getElementById('tlId').value;
+  const page = document.getElementById('tlPageNum').value;
+  const limit = document.getElementById('tlLimit').value;
+  const query = document.getElementById('tlSearch').value;
+  const list = document.getElementById('tlList');
+  const token = localStorage.getItem('token');
   fetch(`${url}users/${id}/timeline?page=${page}&limit=${limit}&query=${query}`, {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "Authorization": "Bearer " + token
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': 'Bearer ' + token
     }
   })
   .then(response => {
@@ -196,7 +196,7 @@ const timeline = () => {
   })
   .then(json => {
     console.log(json);
-    let listedObj = "";
+    let listedObj = '';
     for (let i = 0; i < json.length; i++) {
       const obj = json[i];
       const strObj = JSON.stringify(obj.text);
@@ -209,18 +209,18 @@ const timeline = () => {
 
 // 投稿作成
 const submitPost = () => {
-  const text = document.getElementById("createPost").value;
+  const text = document.getElementById('createPost').value;
   const data = {
     post_params: {
       text: text
     }
   };
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
   fetch(`${url}posts`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "Authorization": "Bearer " + token
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': 'Bearer ' + token
     },
     body: JSON.stringify(data),
   })
@@ -235,19 +235,19 @@ const submitPost = () => {
 
 // 投稿編集
 const editPost = () => {
-  const id = document.getElementById("editPostId").value;
-  const text = document.getElementById("editText").value;
+  const id = document.getElementById('editPostId').value;
+  const text = document.getElementById('editText').value;
   const data = {
     post_params: {
       text: text
     }
   };
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
   fetch(`${url}posts/${id}`, {
-    method: "PUT",
+    method: 'PUT',
     headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "Authorization": "Bearer " + token
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': 'Bearer ' + token
     },
     body: JSON.stringify(data),
   })
@@ -262,13 +262,13 @@ const editPost = () => {
 
 // 投稿削除
 const deletePost = () => {
-  const id = document.getElementById("deletePostId").value;
-  const token = localStorage.getItem("token");
+  const id = document.getElementById('deletePostId').value;
+  const token = localStorage.getItem('token');
   fetch(`${url}posts/${id}`, {
-    method: "DELETE",
+    method: 'DELETE',
     headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "Authorization": "Bearer " + token
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': 'Bearer ' + token
     },
   })
   .then(response => {
