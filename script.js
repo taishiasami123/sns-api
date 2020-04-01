@@ -1,10 +1,12 @@
+let url = 'https://teachapi.herokuapp.com/';
+
 //ユーザー登録
-const signUp = () => {
-  const name = document.getElementById("signUpInputName").value;
-  const bio = document.getElementById("signUpInputBio").value;
-  const email = document.getElementById("signUpInputEmail").value;
-  const password = document.getElementById("signUpInputPwd").value;
-  const password_confirmation = document.getElementById("signUpInputCfmPwd").value
+const signup = () => {
+  const name = document.getElementById('signupName').value;
+  const bio = document.getElementById('signupBio').value;
+  const email = document.getElementById('signupEmail').value;
+  const password = document.getElementById('signupPwd').value;
+  const password_confirmation = document.getElementById('signupCfmPwd').value
   const data = {
     sign_up_user_params: {
       name: name,
@@ -14,10 +16,10 @@ const signUp = () => {
       password_confirmation: password_confirmation
     }
   };
-  fetch("https://teachapi.herokuapp.com/sign_up", {
-    method: "POST",
+  fetch(`${url}sign_up`, {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json; charset=utf-8",
+      'Content-Type': 'application/json; charset=utf-8',
     },
     body: JSON.stringify(data),
   })
@@ -27,16 +29,16 @@ const signUp = () => {
   })
   .then(json => {
     console.log(json);
-    localStorage.setItem("id", json.id);
-    localStorage.setItem("token", json.token)
+    localStorage.setItem('id', json.id);
+    localStorage.setItem('token', json.token)
   });
 };
 
 // ユーザーログイン
-const signIn = () => {
-  const email = document.getElementById("signInInputEmail").value;
-  const password = document.getElementById("signInInputPwd").value;
-  const passwordConfirmation = document.getElementById("signInInputCfmPwd").value;
+const signin = () => {
+  const email = document.getElementById('signinEmail').value;
+  const password = document.getElementById('signinPwd').value;
+  const passwordConfirmation = document.getElementById('signinCfmPwd').value;
   const data = {
     sign_in_user_params: {
       email: email,
@@ -44,10 +46,10 @@ const signIn = () => {
       password_confirmation: passwordConfirmation
     }
   };
-  fetch("https://teachapi.herokuapp.com/sign_in", {
-    method: "POST",
+  fetch(`${url}sign_in`, {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json; charset=utf-8",
+      'Content-Type': 'application/json; charset=utf-8',
     },
     body: JSON.stringify(data),
   })
@@ -57,23 +59,23 @@ const signIn = () => {
   })
   .then(json => {
     console.log(json);
-    localStorage.setItem("id", json.id)
-    localStorage.setItem("token", json.token)
+    localStorage.setItem('id', json.id)
+    localStorage.setItem('token', json.token)
   });
 };
 
 // ユーザー一覧
 const userList = () => {
-  const userPageNumber = document.getElementById("userListPageNum").value;
-  const userPageLimit = document.getElementById("userListLimit").value;
-  const userSearch = document.getElementById("userListSearch").value;
-  const userList = document.getElementById("userList");
-  const token = localStorage.getItem("token");
-  fetch(`https://teachapi.herokuapp.com/users?page=${userPageNumber}&limit=${userPageLimit}&query=${userSearch}`, {
-    method: "GET",
+  const page = document.getElementById('userlistPageNum').value;
+  const limit = document.getElementById('userlistLimit').value;
+  const query = document.getElementById('userlistSearch').value;
+  const list = document.getElementById('userList');
+  const token = localStorage.getItem('token');
+  fetch(`${url}users?page=${page}&limit=${limit}&query=${query}`, {
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "Authorization": "Bearer " + token
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': 'Bearer ' + token
     }
   })
   .then(response => {
@@ -82,28 +84,29 @@ const userList = () => {
   })
   .then(json => {
     console.log(json);
-    let br = "<br>";
+    let listedObj = '';
     for (let i = 0; i < json.length; i++) {
       const obj = json[i];
-      const objstr = JSON.stringify(obj.name);
-      br += objstr + "<br>";
+      const strObj = JSON.stringify(obj.name);
+      const slicedObj = strObj.slice(1, -1);
+      listedObj += '<li class="list-group-item">' + slicedObj + '</li>';
     }
-    userList.innerHTML = br;
+    list.innerHTML = listedObj;
   });
 };
 
 // 投稿一覧
 const postList = () => {
-  const postPageNumber = document.getElementById("postPageNum").value;
-  const postPageLimit = document.getElementById("postLimit").value;
-  const postSearch = document.getElementById("postSearch").value;
-  const postList = document.getElementById("postList");
-  const token = localStorage.getItem("token");
-  fetch(`https://teachapi.herokuapp.com/posts?page=${postPageNumber}&limit=${postPageLimit}&query=${postSearch}`, {
-    method: "GET",
+  const page = document.getElementById('postPageNum').value;
+  const limit = document.getElementById('postLimit').value;
+  const query = document.getElementById('postSearch').value;
+  const list = document.getElementById('postList');
+  const token = localStorage.getItem('token');
+  fetch(`${url}posts?page=${page}&limit=${limit}&query=${query}`, {
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "Authorization": "Bearer " + token
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': 'Bearer ' + token
     }
   })
   .then(response => {
@@ -112,33 +115,34 @@ const postList = () => {
   })
   .then(json => {
     console.log(json);
-    let br = "<br>";
+    let listedObj = '';
     for (let i = 0; i < json.length; i++) {
       const obj = json[i];
-      const objstr = JSON.stringify(obj.text);
-      br += objstr + "<br>";
+      const strObj = JSON.stringify(obj.text);
+      const slicedObj = strObj.slice(1, -1);
+      listedObj += '<li class="list-group-item">' + slicedObj + '</li>';
     }
-    postList.innerHTML = br;
+    list.innerHTML = listedObj;
   });
 };
 
 // ユーザー編集
 const editUser = () => {
-  const editName = document.getElementById("editName").value;
-  const editBio = document.getElementById("editBio").value;
+  const id = document.getElementById('editUserId').value
+  const name = document.getElementById('editUserName').value;
+  const bio = document.getElementById('editUserBio').value;
   const data = {
     user_params: {
-      name: editName,
-      bio: editBio,
+      name: name,
+      bio: bio,
     }
   };
-  const id = localStorage.getItem("id");
-  const token = localStorage.getItem("token");
-  fetch(`https://teachapi.herokuapp.com/users/${id}`, {
-    method: "PUT",
+  const token = localStorage.getItem('token');
+  fetch(`${url}users/${id}`, {
+    method: 'PUT',
     headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "Authorization": "Bearer " + token
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': 'Bearer ' + token
     },
     body: JSON.stringify(data),
   })
@@ -153,13 +157,13 @@ const editUser = () => {
 
 // ユーザー削除
 const deleteUser = () => {
-  const id = document.getElementById("deleteUser").value;
-  const token = localStorage.getItem("token");
-  fetch(`https://teachapi.herokuapp.com/users/${id}`, {
-    method: "DELETE",
+  const id = document.getElementById('deleteUserId').value;
+  const token = localStorage.getItem('token');
+  fetch(`${url}users/${id}`, {
+    method: 'DELETE',
     headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "Authorization": "Bearer " + token
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': 'Bearer ' + token
     },
   })
   .then(response => {
@@ -173,17 +177,17 @@ const deleteUser = () => {
 
 // タイムライン
 const timeline = () => {
-  const tlId = document.getElementById("tlId").value;
-  const tlPageNumber = document.getElementById("tlPageNum").value;
-  const tlPageLimit = document.getElementById("tlLimit").value;
-  const tlSearch = document.getElementById("tlSearch").value;
-  const tlList = document.getElementById("tlList");
-  const token = localStorage.getItem("token");
-  fetch(`https://teachapi.herokuapp.com/users/${tlId}/timeline?page=${tlPageNumber}&limit=${tlPageLimit}&query=${tlSearch}`, {
-    method: "GET",
+  const id = document.getElementById('tlId').value;
+  const page = document.getElementById('tlPageNum').value;
+  const limit = document.getElementById('tlLimit').value;
+  const query = document.getElementById('tlSearch').value;
+  const list = document.getElementById('tlList');
+  const token = localStorage.getItem('token');
+  fetch(`${url}users/${id}/timeline?page=${page}&limit=${limit}&query=${query}`, {
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "Authorization": "Bearer " + token
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': 'Bearer ' + token
     }
   })
   .then(response => {
@@ -192,30 +196,31 @@ const timeline = () => {
   })
   .then(json => {
     console.log(json);
-    let br = "<br>";
+    let listedObj = '';
     for (let i = 0; i < json.length; i++) {
       const obj = json[i];
-      const objstr = JSON.stringify(obj.text);
-      br += objstr + "<br>";
+      const strObj = JSON.stringify(obj.text);
+      const slicedObj = strObj.slice(1, -1);
+      listedObj += '<li class="list-group-item">' + slicedObj + '</li>';
     }
-    tlList.innerHTML = br;
+    list.innerHTML = listedObj;
   });
 };
 
 // 投稿作成
 const submitPost = () => {
-  const createPost = document.getElementById("createPost").value;
+  const text = document.getElementById('createPost').value;
   const data = {
     post_params: {
-      text: createPost
+      text: text
     }
   };
-  const token = localStorage.getItem("token");
-  fetch("https://teachapi.herokuapp.com/posts", {
-    method: "POST",
+  const token = localStorage.getItem('token');
+  fetch(`${url}posts`, {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "Authorization": "Bearer " + token
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': 'Bearer ' + token
     },
     body: JSON.stringify(data),
   })
@@ -230,19 +235,19 @@ const submitPost = () => {
 
 // 投稿編集
 const editPost = () => {
-  const id = document.getElementById("editPostId").value;
-  const editText = document.getElementById("editText").value;
+  const id = document.getElementById('editPostId').value;
+  const text = document.getElementById('editText').value;
   const data = {
     post_params: {
-      text: editText
+      text: text
     }
   };
-  const token = localStorage.getItem("token");
-  fetch(`https://teachapi.herokuapp.com/posts/${id}`, {
-    method: "PUT",
+  const token = localStorage.getItem('token');
+  fetch(`${url}posts/${id}`, {
+    method: 'PUT',
     headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "Authorization": "Bearer " + token
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': 'Bearer ' + token
     },
     body: JSON.stringify(data),
   })
@@ -257,13 +262,13 @@ const editPost = () => {
 
 // 投稿削除
 const deletePost = () => {
-  const id = document.getElementById("deletePostId").value;
-  const token = localStorage.getItem("token");
-  fetch(`https://teachapi.herokuapp.com/posts/${id}`, {
-    method: "DELETE",
+  const id = document.getElementById('deletePostId').value;
+  const token = localStorage.getItem('token');
+  fetch(`${url}posts/${id}`, {
+    method: 'DELETE',
     headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "Authorization": "Bearer " + token
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': 'Bearer ' + token
     },
   })
   .then(response => {
